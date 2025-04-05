@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#grid {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 2px;
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+}
+
+.block {
+    background-color: yellow;
+}
+
+.water {
+    background-color: blue;
+}
