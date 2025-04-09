@@ -1,0 +1,48 @@
+services:
+  # Next.js Frontend
+  - type: web
+    name: imdb-clone-frontend
+    env: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          name: imdb-clone-backend
+          type: web
+          property: url
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+    autoDeploy: true
+    domains:
+      - imdb-clone.example.com
+
+  # Express.js Backend
+  - type: web
+    name: imdb-clone-backend
+    env: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        fromService:
+          name: imdb-clone-frontend
+          type: web
+          property: url
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+    autoDeploy: true
