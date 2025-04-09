@@ -15,7 +15,7 @@ services:
         fromService:
           name: imdb-clone-backend
           type: web
-          property: url
+          property: host
       - key: MONGODB_URI
         sync: false
       - key: JWT_SECRET
@@ -40,7 +40,7 @@ services:
         fromService:
           name: imdb-clone-frontend
           type: web
-          property: url
+          property: host
       - key: MONGODB_URI
         sync: false
       - key: JWT_SECRET
